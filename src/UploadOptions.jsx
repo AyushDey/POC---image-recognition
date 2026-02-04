@@ -13,7 +13,7 @@ export default function UploadOptions({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Upload Options</h2>
+      <h2 className="text-xl font-semibold">Classification</h2>
 
       {/* IMAGE  */}
       <div className="rounded-lg border-2 p-6">
@@ -24,6 +24,7 @@ export default function UploadOptions({
 
         <Button
           className="w-full"
+          variant="outline"
           onClick={() => {
             setSelectedOption("image");
             onOpenCamera();
@@ -34,6 +35,8 @@ export default function UploadOptions({
       </div>
 
       {/* IMAGE + TITLE */}
+      <h2 className="text-xl font-semibold">Upload Options</h2>
+
       <div className="rounded-lg border-2 p-6">
         <div className="flex items-center gap-3 mb-4">
           <ImageIcon className="h-5 w-5" />
@@ -50,6 +53,7 @@ export default function UploadOptions({
         <Button
           disabled={!imageTitle.trim()}
           className="w-full"
+          variant="outline"
           onClick={() => {
             setSelectedOption("image-title");
             onOpenCamera(imageTitle);
