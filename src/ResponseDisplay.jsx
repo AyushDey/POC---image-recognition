@@ -56,7 +56,7 @@ const refenceResponse = {
 
 
 export default function ResponseDisplay({
-  uploadedImage,
+  viewImage,
   response,
   isLoading,
 }) {
@@ -69,8 +69,8 @@ export default function ResponseDisplay({
         <h3 className="text-lg font-semibold">Your Upload</h3>
 
         <div className="flex justify-center border-2 border-dashed p-6">
-          {uploadedImage ? (
-            <img src={uploadedImage} className="max-h-64 object-contain" />
+          {viewImage ? (
+            <img src={viewImage} className="max-h-64 object-contain" />
           ) : (
             <p>No image yet</p>
           )}
@@ -89,7 +89,8 @@ export default function ResponseDisplay({
               {(response?.type == "classify") && (
                 <>
                   <p>{response.class}</p>
-                  <p>Similarity: {response?.confidence}</p>
+                  <p>Item Name: {response?.result?.label}</p>
+                  <p>Similarity: {response?.result?.confidence}</p>
 
                   {response?.matches && <Accordion type="single" collapsible defaultValue="item-1">
                     <AccordionItem value="item-1">
@@ -132,11 +133,11 @@ export default function ResponseDisplay({
                 response?.type === "bulk" && (
                   <>
                     <p>Message: {response.message}</p>
-                    <p>Total Images: {response.total_images}</p>
+                    <p>Total Images: {response.result.totalImages}</p>
 
 
                     <div className="mt-3 text-left">
-                      {Object.entries(response.labels).map(([label, count]) => (
+                      {Object.entries(response.result.labels).map(([label, count]) => (
                         <div
                           key={label}
                           className="flex justify-between border-b pb-1"

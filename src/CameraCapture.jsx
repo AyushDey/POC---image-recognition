@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Button } from "./components/ui/button";
 
-export default function CameraCapture({ onCapture, onClose }) {
+export default function CameraCapture({captureMode, onCapture, onClose }) {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);

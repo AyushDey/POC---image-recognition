@@ -8,6 +8,9 @@ export default function UploadOptions({
   onZipUpload,
   selectedOption,
   setSelectedOption,
+  onImageUpload,
+  setViewImage,
+  setCaptureMode,
 }) {
   const [imageTitle, setImageTitle] = useState("");
 
@@ -32,6 +35,16 @@ export default function UploadOptions({
         >
           Open Camera
         </Button>
+        <Input
+          type="file"
+          accept=".jpg, .png"
+          onChange={(e) => {
+            console.log('From Inpit:', e.target.value )
+            setSelectedOption("image");
+            setViewImage(URL.createObjectURL(e.target.files[0]))
+            onImageUpload(e.target.files[0]);
+          }}  
+        />
       </div>
 
       {/* IMAGE + TITLE */}
@@ -51,6 +64,29 @@ export default function UploadOptions({
         />
 
         <Button
+          // disabled={!imageTitle.trim()}
+          className="w-full"
+          variant="outline"
+          onClick={() => {
+            setSelectedOption("image-title");
+            setCaptureMode(true)
+            onOpenCamera(imageTitle);
+            setImageTitle("");
+          }}
+        >
+          Open Camera
+        </Button>
+        <Input
+          type="file"
+          accept=".jpg, .png"
+          onChange={(e) => {
+            console.log('From Input:', e.target.value )
+            setSelectedOption("image");
+            setPendingTitle(imageTitle)
+            setViewImage(URL.createObjectURL(e.target.files[0]))
+          }}  
+        />
+        <Button
           disabled={!imageTitle.trim()}
           className="w-full"
           variant="outline"
@@ -60,7 +96,7 @@ export default function UploadOptions({
             setImageTitle("");
           }}
         >
-          Open Camera
+          Upload
         </Button>
       </div>
 

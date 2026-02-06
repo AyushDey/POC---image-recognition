@@ -18,11 +18,11 @@ export async function sendImageToApiOld({ image, title }) {
   return response.json(); // backend response
 }
 
-const BASE_URL = "https://api.runway.xyz"; // change this
+const BASE_URL = "http://localhost:8000"; // change this
 
 export async function sendImageToApi({ image, title }) {
   const formData = new FormData();
-  formData.append("image", image);
+  formData.append("file", image);
 
   if (!title) {
 
@@ -92,7 +92,7 @@ export async function sendZipToApi(zipFile) {
   const formData = new FormData();
   formData.append("file", zipFile);
 
-  const response = await fetch(`${BASE_URL}/process-zip`, {
+  const response = await fetch(`${BASE_URL}/bulk_upload`, {
     method: "POST",
     body: formData,
   });
@@ -106,9 +106,8 @@ export async function sendZipToApi(zipFile) {
   return {
     message: data.message ?? "ZIP processed",
     result: {
-      label: "Batch Upload",
-      confidence: "-",
-      price: "-",
+      labels: data?.labels,
+      totalImages: data?.total_images,
     },
     type: "bulk"
   };
