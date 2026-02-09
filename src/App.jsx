@@ -19,17 +19,20 @@ function App() {
   const [uploadedImage, setUploadedImage] = useState(null)
 
   useEffect(()=>{
-    console.log(pendingTitle)
-  },[pendingTitle])
+    // console.log('Pending Title: ', pendingTitle)
+    // console.log('Uploaded Image: ', uploadedImage)
+  },[pendingTitle, uploadedImage])
 
   const handleCameraCapture = async (file) => {
     // preview
     const reader = new FileReader();
-    reader.onloadend = () => setViewImage(reader.result);
+    reader.onloadend = () => {
+      setViewImage(reader.result)
+      setUploadedImage(reader.result)
+    };
     reader.readAsDataURL(file);
 
     setApiResult(null);
-    setUploadedImage(file)
 
     if (!captureMode) {
       setIsLoading(true);
@@ -71,6 +74,8 @@ function App() {
     setApiResult(null);
 
     try {
+      console.log('Uploaded Image: ', uploadedImage)
+      console.log('Pending Title: ', pendingTitle)
       const result = await sendImageToApi({
         image: uploadedImage,
         title: pendingTitle,
