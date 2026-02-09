@@ -11,6 +11,9 @@ export default function UploadOptions({
   onImageUpload,
   setViewImage,
   setCaptureMode,
+  setPendingTitle,
+  setUploadedImage,
+  handleImageWithTitleUpload
 }) {
   const [imageTitle, setImageTitle] = useState("");
 
@@ -39,7 +42,6 @@ export default function UploadOptions({
           type="file"
           accept=".jpg, .png"
           onChange={(e) => {
-            console.log('From Inpit:', e.target.value )
             setSelectedOption("image");
             setViewImage(URL.createObjectURL(e.target.files[0]))
             onImageUpload(e.target.files[0]);
@@ -80,10 +82,11 @@ export default function UploadOptions({
           type="file"
           accept=".jpg, .png"
           onChange={(e) => {
-            console.log('From Input:', e.target.value )
+            console.log('From Inpit:', URL.createObjectURL(e.target.files[0]) )
             setSelectedOption("image");
             setPendingTitle(imageTitle)
             setViewImage(URL.createObjectURL(e.target.files[0]))
+            setUploadedImage(e.target.files[0])
           }}  
         />
         <Button
@@ -91,9 +94,7 @@ export default function UploadOptions({
           className="w-full"
           variant="outline"
           onClick={() => {
-            setSelectedOption("image-title");
-            onOpenCamera(imageTitle);
-            setImageTitle("");
+            handleImageWithTitleUpload()
           }}
         >
           Upload

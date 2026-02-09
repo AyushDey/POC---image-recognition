@@ -26,14 +26,14 @@ function App() {
 
     setApiResult(null);
     setUploadedImage(file)
-    
-    if(!captureMode){
+
+    if (!captureMode) {
       setIsLoading(true);
       try {
-      const result = await sendImageToApi({
-        image: file,
-        title: pendingTitle,
-      });
+        const result = await sendImageToApi({
+          image: file,
+          title: pendingTitle,
+        });
 
         setApiResult(result);
       } catch (err) {
@@ -43,6 +43,7 @@ function App() {
         setIsLoading(false);
         setPendingTitle(null);
         setUploadedImage(null)
+        setCaptureMode(false)
       }
     }
   };
@@ -61,7 +62,28 @@ function App() {
       setIsLoading(false);
     }
   };
-  const handleImageUpload = async (image) =>{
+  const handleImageWithTitleUpload = async () => {
+    setIsLoading(true);
+    setApiResult(null);
+
+    try {
+      const result = await sendImageToApi({
+        image: uploadedImage,
+        title: pendingTitle,
+      });
+
+      setApiResult(result);
+    } catch (err) {
+      console.error(err);
+      setApiResult({ message: "Error", result: { label: "-", confidence: "-", price: "-" } });
+    } finally {
+      setIsLoading(false);
+      setPendingTitle(null);
+      setUploadedImage(null)
+      setCaptureMode(false)
+    }
+  };
+  const handleImageUpload = async (image) => {
     setIsLoading(true);
     setApiResult(null);
     setUploadedImage(image)
@@ -82,7 +104,7 @@ function App() {
       setUploadedImage(null)
     }
   }
-  const handleCaptureUpload = async (image) =>{
+  const handleCaptureUpload = async (image) => {
     setIsLoading(true);
     setApiResult(null);
     setUploadedImage(image)
@@ -119,9 +141,11 @@ function App() {
           setSelectedOption={setSelectedOption}
           setPendingTitle={setPendingTitle}
           setViewImage={setViewImage}
+          setUploadedImage={setUploadedImage}
           getUploadedImage={viewImage}
           setCaptureMode={setCaptureMode}
           onCaptureUpload={handleCaptureUpload}
+          handleImageWithTitleUpload={handleImageWithTitleUpload}
         />
 
         <ResponseDisplay
