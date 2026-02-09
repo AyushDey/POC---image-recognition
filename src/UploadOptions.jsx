@@ -12,10 +12,10 @@ export default function UploadOptions({
   setViewImage,
   setCaptureMode,
   setPendingTitle,
+  getPendingTitle,
   setUploadedImage,
   handleImageWithTitleUpload
 }) {
-  const [imageTitle, setImageTitle] = useState("");
 
   return (
     <div className="space-y-4">
@@ -60,8 +60,8 @@ export default function UploadOptions({
 
         <Input
           placeholder="Enter title"
-          value={imageTitle}
-          onChange={(e) => setImageTitle(e.target.value)}
+          value={getPendingTitle}
+          onChange={(e) => setPendingTitle(e.target.value)}
           className="mb-3"
         />
 
@@ -72,8 +72,7 @@ export default function UploadOptions({
           onClick={() => {
             setSelectedOption("image-title");
             setCaptureMode(true)
-            onOpenCamera(imageTitle);
-            setImageTitle("");
+            onOpenCamera(getPendingTitle);
           }}
         >
           Open Camera
@@ -84,13 +83,12 @@ export default function UploadOptions({
           onChange={(e) => {
             console.log('From Inpit:', URL.createObjectURL(e.target.files[0]) )
             setSelectedOption("image");
-            setPendingTitle(imageTitle)
             setViewImage(URL.createObjectURL(e.target.files[0]))
             setUploadedImage(e.target.files[0])
           }}  
         />
         <Button
-          disabled={!imageTitle.trim()}
+          disabled={!getPendingTitle?.trim()}
           className="w-full"
           variant="outline"
           onClick={() => {

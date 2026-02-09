@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import "./App.css";
 
 import UploadOptions from "./UploadOptions";
@@ -17,6 +17,10 @@ function App() {
   const [pendingTitle, setPendingTitle] = useState(null);
   const [captureMode, setCaptureMode] = useState(false)
   const [uploadedImage, setUploadedImage] = useState(null)
+
+  useEffect(()=>{
+    console.log(pendingTitle)
+  },[pendingTitle])
 
   const handleCameraCapture = async (file) => {
     // preview
@@ -140,6 +144,7 @@ function App() {
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
           setPendingTitle={setPendingTitle}
+          getPendingTitle={pendingTitle}
           setViewImage={setViewImage}
           setUploadedImage={setUploadedImage}
           getUploadedImage={viewImage}
