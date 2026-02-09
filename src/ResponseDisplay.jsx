@@ -109,7 +109,7 @@ export default function ResponseDisplay({
               )}
               {(response?.type == "reference") && (
                 <>
-                  <p>Message: {response?.label}</p>
+                  <p>Message: {response?.message}</p>
                   <p>FileName : {response?.fileName}</p>
 
                   {response?.matches && <Accordion type="single" collapsible defaultValue="item-1">

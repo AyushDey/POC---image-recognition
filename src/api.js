@@ -58,9 +58,9 @@ export async function sendImageToApi({ image, title }) {
   } else {
 
 
-    formData.append("title", title);
+    formData.append("label", title);
     console.log(formData);
-    console.log(formData.get("title"));
+    console.log(formData.get("label"));
     console.log(formData.get("image"));
     console.log(formData.get("REFERENCE CALL"));
 
@@ -76,13 +76,9 @@ export async function sendImageToApi({ image, title }) {
     }
 
     const data = await response.json();
-
     return {
-      message: "Image classified successfully",
-      result: {
-        label: data.message,
-        filename: data.filename
-      },
+      message: data.message,
+      fileName: data.filename,
       type: "reference" // not provided by this API
     };
   }

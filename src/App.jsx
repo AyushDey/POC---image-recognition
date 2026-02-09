@@ -28,12 +28,12 @@ function App() {
     const reader = new FileReader();
     reader.onloadend = () => {
       setViewImage(reader.result)
-      setUploadedImage(reader.result)
     };
     reader.readAsDataURL(file);
+    setUploadedImage(file)
 
     setApiResult(null);
-
+    console.log(file)
     if (!captureMode) {
       setIsLoading(true);
       try {
@@ -93,12 +93,14 @@ function App() {
     }
   };
   const handleImageUpload = async (image) => {
+    console.log(image)
     setIsLoading(true);
     setApiResult(null);
     setUploadedImage(image)
 
     try {
-      console.log(pendingTitle)
+      console.log('Pending Title: ', pendingTitle)
+    console.log('Uploaded Image: ', uploadedImage)
       const result = await sendImageToApi({
         image: image,
         title: pendingTitle
@@ -136,7 +138,8 @@ function App() {
   }
   return (
     <main className="min-h-screen p-6">
-      <h1 className="text-3xl font-bold mb-6">Upload & Process</h1>
+      <h1 className="text-3xl font-bold mb-6">SnapClass</h1>
+      <h2 className="text-3xl font-bold mb-6">Embeddings based Image Recognition</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <UploadOptions
