@@ -1,8 +1,12 @@
 import { Loader2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./components/ui/accordion";
 const previewResponse = {
+  result : {
+    label : "Tuile_a_Douille modeified"
+  }, 
   class: "Tuile_a_Douille",
   confidence: 0.7698,
+  type : "classify",
   matches: [
     {
       class: "Tuile_Chatiere",
@@ -60,9 +64,15 @@ export default function ResponseDisplay({
   response,
   isLoading,
 }) {
-  // if (!response) {
-  //   response = bulkResponse;
-  // }
+  if (!response) {
+    response = previewResponse;
+    isLoading = false;
+  }
+      response = previewResponse;
+
+  console.log("Response class -> " + response.class);
+  console.log("Response class new -> " + response.result.label);
+  
   return (
     <div className="space-y-6">
       <div className="space-y-3">
@@ -94,7 +104,7 @@ export default function ResponseDisplay({
 
                   {response?.matches?.length > 1 && <Accordion type="single" collapsible defaultValue="item-1">
                     <AccordionItem value="item-1">
-                      <AccordionTrigger>Other Predictions</AccordionTrigger>
+                      <span><AccordionTrigger className={`text-white text-center`}>Other Predictions</AccordionTrigger></span>
                       <AccordionContent>
                         <p>{response.matches.map((item) => (
                           <div className="flex-1 justify-center border-2 p-2 m-1 rounded-2xl gap-y-2">
