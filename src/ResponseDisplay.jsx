@@ -89,10 +89,10 @@ export default function ResponseDisplay({
               {(response?.type == "classify") && (
                 <>
                   <p>{response.class}</p>
-                  <p>Item Name: {response?.result?.label}</p>
-                 { response?.result?.confidence &&  <p>Similarity: {response?.result?.confidence}</p>}
+                  <p>Item Name: {response?.result?.label}</p> 
+                 { response?.result?.confidence &&  <p>Similarity: {(response?.result?.confidence * 100).toFixed(2)} %</p>}
 
-                  {response?.matches && <Accordion type="single" collapsible defaultValue="item-1">
+                  {response?.matches?.length > 1 && <Accordion type="single" collapsible defaultValue="item-1">
                     <AccordionItem value="item-1">
                       <AccordionTrigger>Other Predictions</AccordionTrigger>
                       <AccordionContent>
