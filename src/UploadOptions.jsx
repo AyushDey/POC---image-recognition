@@ -29,7 +29,7 @@ export default function UploadOptions({
         </div>
 
         <Button
-          className="w-full"
+          className="w-full text-white hover:text-white"
           variant="outline"
           onClick={() => {
             setSelectedOption("image");
@@ -67,7 +67,7 @@ export default function UploadOptions({
 
         <Button
           // disabled={!imageTitle.trim()}
-          className="w-full"
+          className="w-full text-white hover:text-white"
           variant="outline"
           onClick={() => {
             setSelectedOption("image-title");
