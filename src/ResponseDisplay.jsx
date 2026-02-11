@@ -90,7 +90,7 @@ export default function ResponseDisplay({
                 <>
                   <p>{response.class}</p>
                   <p>Item Name: {response?.result?.label}</p>
-                  <p>Similarity: {response?.result?.confidence}</p>
+                 { item?.result &&  <p>Similarity: {response?.result?.confidence}</p>}
 
                   {response?.matches && <Accordion type="single" collapsible defaultValue="item-1">
                     <AccordionItem value="item-1">
