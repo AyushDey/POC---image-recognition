@@ -64,14 +64,14 @@ export default function ResponseDisplay({
   response,
   isLoading,
 }) {
-  if (!response) {
-    response = previewResponse;
-    isLoading = false;
-  }
-      response = previewResponse;
+  // if (!response) {
+  //   response = previewResponse;
+  //   isLoading = false;
+  // }
+  //     response = previewResponse;
 
-  console.log("Response class -> " + response.class);
-  console.log("Response class new -> " + response.result.label);
+  // console.log("Response class -> " + response.class);
+  // console.log("Response class new -> " + response.result.label);
   
   return (
     <div className="space-y-6">
