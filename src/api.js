@@ -48,7 +48,8 @@ export async function sendImageToApi({ image, title }) {
       message: "Image classified successfully",
       result: {
         label: data.class,
-        confidence: (data.confidence * 100).toFixed(2) + "%",
+        // confidence: (data.confidence * 100).toFixed(2) + "%",
+        confidence: data?.confidence || null,
         price: "-",
 
       },
